@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Reacciones</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h2>Estado del Juego</h2>
+<canvas id="reactionChart"></canvas>
+
+<script>
+    const ctx = document.getElementById('reactionChart').getContext('2d');
+    let chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Equipo1', 'Equipo2', 'Equipo3'],
+            datasets: [{
+                label: 'Puntos',
+                data: [0, 0, 0],
+                backgroundColor: ['red', 'blue', 'green']
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    function updateChart() {
+        fetch('/api/reactions')
+            .then(response => response.json())
+            .then(data => {
+                // data es un Map<String,Integer> => {Equipo1: X, Equipo2: Y, Equipo3: Z}
+                chart.data.datasets[0].data = [
+                    data.Equipo1 || 0,
+                    data.Equipo2 || 0,
+                    data.Equipo3 || 0
+                ];
+                chart.update();
+            });
+    }
+
+    // Actualiza la gráfica cada 2s
+    setInterval(updateChart, 2000);
+</script>
+
+</body>
+</html>
