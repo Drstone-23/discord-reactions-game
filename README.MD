@@ -31,15 +31,9 @@ git --version
 ---
 
 ## 📂 Clonar el repositorio
-Ejecuta el siguiente comando:
-```sh
-git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-cd TU_REPOSITORIO
-```
 
-Ejemplo real:
 ```sh
-git clone https://github.com/rayanchelouati/discord-reactions-game.git
+git clone https://github.com/Drstone-23/discord-reactions-game
 cd discord-reactions-game
 ```
 
